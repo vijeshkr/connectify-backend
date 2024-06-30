@@ -3,8 +3,8 @@ import bycrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const register = (req,res) => {
+
     // Check user if exists
-    
     const q = 'SELECT * FROM users WHERE username = ?';
 
     db.query(q,[req.body.username], (err,data) => {
@@ -27,6 +27,7 @@ export const register = (req,res) => {
 };
 
 export const login = (req,res) => {
+    
     const q = 'SELECT * FROM users WHERE username = ?';
 
     db.query(q,[req.body.username], (err, data) => {

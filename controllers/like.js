@@ -14,12 +14,13 @@ export const getLikes = (req,res) => {
 // Add like
 export const addLike = (req,res) => {
 
+    // Retrieve jwt token from cookies
     const token = req.cookies.accessToken;
     if (!token) {
         return res.status(401).json('Not logged in');
     }
 
-
+// Verify the jwt token
 jwt.verify(token, 'secretkey', (err, userInfo) => {
     if (err) {
         return res.status(403).json('Token is not valid');

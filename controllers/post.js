@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 
 export const getPosts = (req,res) => {
     
+    // Get the user id from the query parameters
     const userId = req.query.userId;
     const token = req.cookies.accessToken;
     if (!token) {
@@ -16,7 +17,7 @@ jwt.verify(token, 'secretkey', (err, userInfo) => {
         return res.status(403).json('Token is not valid');
     }
 
-
+    // Get posts by a specific user or posts by the user and followed users
     const q = userId ? `SELECT p.*, u.id AS userId, name,profilePic FROM posts AS p JOIN users AS u ON u.id = p.userId WHERE p.userId = ?` 
     :`SELECT p.*,u.id AS userId, name, profilePic
      FROM posts AS p 
